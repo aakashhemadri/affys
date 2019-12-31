@@ -1,0 +1,151 @@
+body {
+  font-family: 'Lato', san-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  margin: 0;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+hr {
+  margin: 20px;
+}
+
+textarea {
+  width:100%;
+  white-space: nowrap;
+}
+
+code {
+  font-family: 'Source Code Pro', monospace;
+}
+
+#header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 50px;
+  background: #333333;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+#title {
+  float: left;
+  padding-top: 10px;
+  padding-left: 10%;
+  color: white;
+  font-size: 1.25rem;
+}
+
+#link {
+  float: right;
+  padding-top: 10px;
+  padding-right: 10%;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+#link a, #link a:hover {
+  color: mediumorchid;
+  text-decoration: none;
+}
+
+#container {
+  padding: 0 50px 0 50px;
+  margin: 0 auto;
+  display: block;
+  overflow-x: hidden;
+  background: #F0F0F0;
+}
+
+#content {
+  background: #F0F0F0;
+  margin: 50px auto 0 auto;
+  padding: 20px 0 20px 0;
+}
+
+#run {
+  margin-top: 10px;
+  border-radius: 15%;
+}
+
+#resultcontainer {
+  height: 710px;
+  width: 1000px;
+  padding: 0;
+  margin: 0;
+  /* display:flex; */
+  margin: 0;
+  /* --c : rgba(255,255,255,0.7);
+  --t : transparent; */
+  text-align: center;
+  font-family: 'Crete Round', sans-serif;
+  color:wheat;
+  font-size: 25px;
+}
+
+#resultImage{
+  height: 710px;
+  width: 1000px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-image: url("night.png"); 
+  background-repeat: no-repeat;
+  /* position: relative; */
+}
+
+.amount{
+  /* position: absolute;
+  width:100%;
+  top: 318px;
+  text-align: center; */
+  font-weight: bold;
+  color: white;
+}
+
+.hashtags{
+  color:darkslateblue;
+}
+#resultName{
+  /* position: absolute;
+  width:100%;
+  top: 125px;
+  text-align: center; */
+  font-family: 'Dancing Script', cursive;
+  font-size: 80px;
+  color:aqua;
+} 
+
+#result{
+  width: 80%;
+  max-width: 960px;
+  padding: 0 50px 0 50px;
+  margin: 0 auto;
+  display: block;
+  overflow-x: hidden;
+  background: #F0F0F0;
+}
+.col {
+  flex:1;
+}
+.pat-1 {
+  background-color: #026873;
+background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
+linear-gradient(90deg, rgba(255,255,255,.13) 50%, transparent 50%),
+linear-gradient(90deg, transparent 50%, rgba(255,255,255,.17) 50%),
+linear-gradient(90deg, transparent 50%, rgba(255,255,255,.19) 50%);
+background-size: 13px, 29px, 37px, 53px;
+  /* background-color: hsl(2, 57%, 40%);
+background-image: repeating-linear-gradient(transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),
+repeating-linear-gradient(270deg, transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),
+repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2px, rgba(0,0,0,.2) 3px, transparent 3px, transparent 5px, rgba(0,0,0,.2) 5px); */
+
+}
