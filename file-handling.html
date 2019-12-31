@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>File Handling</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato|Roboto|Source+Code+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/monokai.min.css">
+    <link rel="stylesheet" href="demo.css">
+    <link href="https://fonts.googleapis.com/css?family=Crete+Round|Dancing+Script&display=swap" rel="stylesheet">
+    <script src="html2canvas.min.js"></script>
+    <script src="dom2image.js" /></script>
+
+  </head>
+
+  <body>
+
+    <div id="header">
+      <h1 id="title">Load from File</h1>
+      <div id="link"><a href="https://github.com/typeiii/jquery-csv">GitHub</a></div>
+    </div>
+    <div id="container">
+      <section id="content">
+        <h2>Input</h2>
+        <input type="file" id="files" name="files[]" multiple />
+        <hr />
+        <h2>FileInfo</h2>
+        <div id="file-info"></div>
+        <hr />
+        <h2>Result</h2>
+        <div id="resultcontainer">
+          <div id="resultImage" >
+            <br/><br>
+            <span id="resultName">Saju</span><br/>
+            THANK YOU SO MUCH!<br/><br/>
+            You're such a super star!<br/>
+            You've pushed yourself out of your comfort zone and raised a whopping <span id="resultAmount" class="amount">8000</span> #forourkids.<br/><br/><br/>
+
+            This is the final lap. Let's push ourself get <span class="amount">2000</span> more (each) by 25th of this month <br/>
+            I know you can, <b>because you're amazing</b><br/><br/>
+
+            <span class="hashtags">#Bengaluru #Bossisback #BeTheirHero #HeroUp</span>
+
+          </div>
+        </div>
+      </div>
+        <!-- <textarea id="result" style="height: 250px;"></textarea> -->
+      </section>
+    </div>
+    <script src="http://code.jquery.com/jquery-3.3.1.slim.js" integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA=" crossorigin="anonymous"></script>
+    <script src="src/jquery.csv.js"></script>
+    <script src="helpers.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      // enable syntax highlighting
+      hljs.initHighlightingOnLoad();
+
+      $(document).ready(function() {
+        //debugger;
+        if(isFileAPIAvailable()) {
+          $('#files').bind('change', handleDialog);
+        }
+      });
+
+      function handleDialog(event) {
+        //debugger;
+        var files = event.target.files;
+        var file = files[0];
+
+        var fileInfo = `
+          <span style="font-weight:bold;">${escape(file.name)}</span><br>
+          - FileType: ${file.type || 'n/a'}<br>
+          - FileSize: ${file.size} bytes<br>
+          - LastModified: ${file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'}
+        `;
+        //$('#file-info').remove();
+        $('#file-info').html(fileInfo);
+
+        var reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = function(event){
+          function downloadURI(uri, name) {
+              var link = document.createElement("a");
+
+              link.download = name;
+              link.href = uri;
+              document.body.appendChild(link);
+              link.click();   
+              //after creating link you should delete dynamic link
+              //clearDynamicLink(link); 
+          }
+
+
+          var csv = event.target.result;
+          var data = $.csv.toArrays(csv);
+          //debugger;
+
+          data.forEach((val)=>{ 
+            //console.log(val[0] + "he eh" + val[1])
+            $('#resultName').html(val[0])
+            $('#resultAmount').html(val[1])
+            // html2canvas(document.querySelector("#header"),{
+            //   useCORS:true,
+            //   allowTaint: true,
+            //   foreignObjectRendering: true
+            // }).then(function (canvas) {
+            //   //document.body.appendChild(canvas);
+            //     var myImage = canvas.toDataURL();
+            //     downloadURI(myImage, val[0]+val[1]+"MaSimulation.png");
+            //   })
+            var node = document.getElementById('resultImage');
+            domtoimage.toPng(node)
+              .then(function (dataUrl) {
+                downloadURI(dataUrl, val[0]+val[1]+"MaSimulation.png");
+              })
+              .catch(function (error) {
+                  console.error('oops, something went wrong!', error);
+              });
+            });
+
+            
+          //$('#result').empty();
+          //$('#result').html(JSON.stringify(data, null, 2));
+        }
+      }
+    </script>
+  </body>
+</html>
