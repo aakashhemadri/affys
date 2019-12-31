@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Affy Generation</title>
     <link href="https://fonts.googleapis.com/css?family=Lato|Roboto|Source+Code+Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/monokai.min.css">
@@ -8,147 +9,134 @@
     <link href="https://fonts.googleapis.com/css?family=Crete+Round|Dancing+Script&display=swap" rel="stylesheet">
     <script src="html2canvas.min.js"></script>
     <script src="dom2image.js"></script>
+</head>
 
-  </head>
-
-  <body>
-
+<body>
     <div id="header">
-      <h1 id="title">Affy Card Generator</h1>
-      <div id="link"><a href="https://github.com/aakashhemadri/affys">Github</a></div>
+        <h1 id="title">Affy Card Generator</h1>
+        <div id="link"><a href="https://github.com/aakashhemadri/affys">Fork</a></div>
     </div>
     <div id="container">
-      <section id="content">
-        <h2>Upload CSV file.</h2>
-        <input type="file" id="files" name="files[]" multiple />
-        <hr />
-        <h2>File Information</h2>
-        <div id="file-info"></div>
-        <hr />
-        <h2>Card</h2>
-        <div id="resultcontainer">
-          <div id="resultImage" >
-            <br/><br><br/><br/><br/>
-            <span id="resultName">Danya Rathinasabapathy</span><br/>
-            THANK YOU SO MUCH!<br/><br/>
-            You're such a super star!<br/>
-            You've pushed yourself out of your comfort zone and raised a <br/>whopping <span class="amount">&#8377;<span id="resultAmount">1</span></span>  #forourkids.<br/><br/><br/>
-
-            This is the final lap.<br/> Let's push ourself get <span class="amount">&#8377; 5000</span> more (each)<br/> by 7th January 2020<br/>
-            I know you can, <b>because you're amazing</b><br/><br/><br/><br/>
-
-            <span class="hashtags">#TirupurTribe #TribeWithAVibe #BeTheirHero #HeroUp</span>
-
-          </div>
-        </div>
-      </div>
-        <!-- <textarea id="result" style="height: 250px;"></textarea> -->
-      </section>
+        <section id="content">
+            <h2>Upload CSV file.</h2>
+            <input type="file" id="files" name="files[]" multiple />
+            <hr />
+            <h2>File Information</h2>
+            <div id="file-info"></div>
+            <hr />
+            <h2>Card</h2>
+            <div id="resultcontainer">
+                <div id="resultImage">
+                    <br /><br><br /><br /><br />
+                    <span id="resultName">Danya Rathinasabapathy</span><br />
+                    THANK YOU SO MUCH!<br /><br />
+                    You're such a super star!<br />
+                    You've pushed yourself out of your comfort zone and raised a <br />whopping <span
+                        class="amount">&#8377;<span id="resultAmount">1</span></span> #forourkids.<br /><br /><br />
+                    This is the final lap.<br /> Let's push ourself get <span class="amount">&#8377; 5000</span> more
+                    (each)<br /> by 7th January 2020<br />
+                    I know you can, <b>because you're amazing</b><br /><br /><br /><br />
+                    <span class="hashtags">#TirupurTribe #TribeWithAVibe #BeTheirHero #HeroUp</span>
+                </div>
+            </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.js" integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA=" crossorigin="anonymous"></script>
+    <!-- <textarea id="result" style="height: 250px;"></textarea> -->
+    </section>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.js"
+        integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA=" crossorigin="anonymous"></script>
     <script src="src/jquery.csv.js"></script>
     <script src="helpers.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
     <script>
-      // enable syntax highlighting
-      hljs.initHighlightingOnLoad();
-
-      $(document).ready(function() {
-        //debugger;
-        if(isFileAPIAvailable()) {
-          $('#files').bind('change', handleDialog);
-        }
-      });
-
-      function handleDialog(event) {
-        //debugger;
-        var files = event.target.files;
-        var file = files[0];
-
-        var fileInfo = `
+        // enable syntax highlighting
+        hljs.initHighlightingOnLoad();
+        $(document).ready(function () {
+            //debugger;
+            if (isFileAPIAvailable()) {
+                $('#files').bind('change', handleDialog);
+            }
+        });
+        function handleDialog(event) {
+            //debugger;
+            var files = event.target.files;
+            var file = files[0];
+            var fileInfo = `
           <span style="font-weight:bold;">${escape(file.name)}</span><br>
           - FileType: ${file.type || 'n/a'}<br>
           - FileSize: ${file.size} bytes<br>
           - LastModified: ${file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'}
         `;
-        //$('#file-info').remove();
-        $('#file-info').html(fileInfo);
+            //$('#file-info').remove();
+            $('#file-info').html(fileInfo);
 
-        var reader = new FileReader();
-        reader.readAsText(file);
-        reader.onload = function(event){
-          function downloadURI(image,name) {
-            //debugger;
-            var link = document.createElement("a");
-
-              link.download = name;
-              link.href = image;
-              document.body.appendChild(link);
-              link.click();  
-              //after creating link you should delete dynamic link
-              //clearDynamicLink(link); 
-          }
-          function DomStudd(node,val){
-            this.node = node;
-            this.val = val;
-
-            
-          }
-          DomStudd.prototype.performAction = function(dataSent,index){
-            var node = this.node
-            var val = this.val
-              domtoimage.toPng(node)
-              .then(function (dataUrl) {
-                var copyDataUrl = {...dataUrl}
-                //arrayMan.push({image:dataUrl, name:})
-                //if (arrayMan.length == data.length) {
-                  downloadURI(dataUrl,val[0]+val[1]+"MaSimulation.png");
-                  if (index < dataSent.length -1){
-                    recursiveThing(dataSent,index+1)
-                  }
-                //}
-              })
-              .catch(function (error) {
-                  console.error('oops, something went wrong!', error);
-              });
+            var reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = function (event) {
+                function downloadURI(image, name) {
+                    //debugger;
+                    var link = document.createElement("a");
+                    link.download = name;
+                    link.href = image;
+                    document.body.appendChild(link);
+                    link.click();
+                    //after creating link you should delete dynamic link
+                    //clearDynamicLink(link); 
+                }
+                function DomStudd(node, val) {
+                    this.node = node;
+                    this.val = val;
+                }
+                DomStudd.prototype.performAction = function (dataSent, index) {
+                    var node = this.node
+                    var val = this.val
+                    domtoimage.toPng(node)
+                        .then(function (dataUrl) {
+                            var copyDataUrl = { ...dataUrl }
+                            //arrayMan.push({image:dataUrl, name:})
+                            //if (arrayMan.length == data.length) {
+                            downloadURI(dataUrl, val[0] + val[1] + "MaSimulation.png");
+                            if (index < dataSent.length - 1) {
+                                recursiveThing(dataSent, index + 1)
+                            }
+                            //}
+                        })
+                        .catch(function (error) {
+                            console.error('oops, something went wrong!', error);
+                        });
+                }
+                var csv = event.target.result;
+                var data = $.csv.toArrays(csv);
+                //debugger;
+                var arrayMan = [];
+                //var index = 0
+                function recursiveThing(dataSent, index) {
+                    var val = dataSent[index]
+                    $('#resultName').html(val[0])
+                    $('#resultAmount').html(val[1])
+                    var node = document.getElementById('resultImage');
+                    var copyNode = { ...node }
+                    var studd = new DomStudd(node, val)
+                    var a = studd.performAction(dataSent, index)
+                }
+                recursiveThing(data, 0)
+                // data.forEach((val,index)=>{ 
+                //   //console.log(val[0] + "he eh" + val[1])
+                //   // html2canvas(document.querySelector("#header"),{
+                //   //   useCORS:true,
+                //   //   allowTaint: true,
+                //   //   foreignObjectRendering: true
+                //   // }).then(function (canvas) {
+                //   //   //document.body.appendChild(canvas);
+                //   //     var myImage = canvas.toDataURL();
+                //   //     downloadURI(myImage, val[0]+val[1]+"MaSimulation.png");
+                //   //   })
+                //   });
+                //$('#result').empty();
+                //$('#result').html(JSON.stringify(data, null, 2));
             }
-          var csv = event.target.result;
-          var data = $.csv.toArrays(csv);
-          //debugger;
-          var arrayMan = [];
-          //var index = 0
-          
-          function recursiveThing(dataSent,index){
-            var val = dataSent[index]
-            $('#resultName').html(val[0])
-            $('#resultAmount').html(val[1])
-            var node = document.getElementById('resultImage');
-            var copyNode = {...node}
-              var studd = new DomStudd(node,val)
-              var a = studd.performAction(dataSent,index)
-          }
-          recursiveThing(data,0)
-          // data.forEach((val,index)=>{ 
-          //   //console.log(val[0] + "he eh" + val[1])
-            
-          //   // html2canvas(document.querySelector("#header"),{
-          //   //   useCORS:true,
-          //   //   allowTaint: true,
-          //   //   foreignObjectRendering: true
-          //   // }).then(function (canvas) {
-          //   //   //document.body.appendChild(canvas);
-          //   //     var myImage = canvas.toDataURL();
-          //   //     downloadURI(myImage, val[0]+val[1]+"MaSimulation.png");
-          //   //   })
-            
-            
-          //   });
-            
-            
-          //$('#result').empty();
-          //$('#result').html(JSON.stringify(data, null, 2));
         }
-      }
     </script>
-  </body>
+</body>
+
 </html>
